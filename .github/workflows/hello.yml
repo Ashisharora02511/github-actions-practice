@@ -14,7 +14,7 @@ jobs:
       - name: Say Hello
         run: echo "Hello from GitHub Actions!"
       - name: Show current date and time
-        run: data
+        run: date
       - name: Show Branch Name
         run: echo ${{ github.ref_name }}
       - name: List Repo Files
