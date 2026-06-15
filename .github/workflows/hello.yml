@@ -1,7 +1,9 @@
 name: First CI Pipeline
 
 on:
-  push:
+  pull_request:
+    branches:
+       - main
 
 jobs:
   greet:
