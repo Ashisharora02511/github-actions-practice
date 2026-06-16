@@ -11,7 +11,7 @@ jobs:
           hostname
           whoami
   windows-job:
-    runs-on: window-latest
+    runs-on: windows-latest
     steps:
       - name: Print OS
         run: |
