@@ -15,7 +15,7 @@ jobs:
       - name: Run On Failure
         if: failure()
         run: echo "Previous step failed"
-   push-only-job:
+  push-only-job:
        if: github.event_name == 'push'
        runs-on: ubuntu-latest
        steps:
