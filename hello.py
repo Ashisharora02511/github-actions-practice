@@ -1,1 +1,1 @@
-print("CI Test Passed")
+raise Exception("CI Test Passed")
