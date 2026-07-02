@@ -8,7 +8,6 @@ on:
 jobs:
 
   build:
-
     uses: ./.github/workflows/reusable-build.yml
 
     with:
@@ -17,3 +16,12 @@ jobs:
 
     secrets:
       docker_token: ${{ secrets.DOCKER_TOKEN }}
+
+  print-version:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Build Version
+        run: |
+          echo "Build Version: ${{ needs.build.outputs.build_version }}"
