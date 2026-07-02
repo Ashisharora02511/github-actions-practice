@@ -1,7 +1,7 @@
 name: Reusable Build Workflow
 
 on: 
- workflow_call
+workflow_call:
    inputs:
      app_name:
        required: true
