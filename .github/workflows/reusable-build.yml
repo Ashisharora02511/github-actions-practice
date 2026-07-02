@@ -20,8 +20,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Print Information
         run: |
-          echo "Building $ {{ inputs.app_name }}"
-          echo  "Environment: ${{ inputs.environment }"
+          echo "Building ${{ inputs.app_name }}"
+          echo  "Environment: ${{ inputs.environment }}"
       - name: Check Secret
         run: |
           if [ -n "${{ secrets.docker_token }}" ]; then
