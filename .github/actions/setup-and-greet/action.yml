@@ -36,4 +36,5 @@ runs:
 
     - name: Print Runner OS
       shell: bash
-      run: echo "Runner OS: $RUNNER_OS"
+      run: |
+        echo "Runner OS: $RUNNER_OS"
