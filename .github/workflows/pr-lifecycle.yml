@@ -1,4 +1,4 @@
-name: PR LifeCycle Demo
+name: PR LifeCycle
 on:
   pull_request:
     types:
