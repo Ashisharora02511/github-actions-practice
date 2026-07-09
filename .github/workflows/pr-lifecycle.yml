@@ -20,4 +20,4 @@ jobs:
       - name: After Merge this command run
         if: github.event.pull_request.merged == true
         run: |
-          echo "PR merged successfully. Deployment can start ."
+          echo "PR merged successfully. Deployment can start after pull request"
