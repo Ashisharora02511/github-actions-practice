@@ -17,7 +17,7 @@ jobs:
           echo "Author: ${{ github.event.pull_request.user.login }}"
           echo "Source: ${{ github.head_ref }}"
           echo "Target: ${{ github.base_ref }}"
-      - name: After Merge
+      - name: After Merge this command run
         if: github.event.pull_request.merged == true
         run: |
           echo "PR merged successfully. Deployment can start ."
