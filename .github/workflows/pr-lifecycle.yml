@@ -7,10 +7,10 @@ on:
       - reopened
       - closed
 jobs:
-  pr-info:
+  pull-request-info:
     runs-on: ubuntu-latest
     steps:
-      - name: Print PR Details
+      - name: Print Pull-Request Details
         run: |
           echo "Event: ${{ github.event.action}}"
           echo "Title: ${{ github.event.pull_request.title}}"
