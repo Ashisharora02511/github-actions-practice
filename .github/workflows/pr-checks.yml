@@ -15,9 +15,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # -----------------------------
-      # Branch Name Validation
-      # -----------------------------
       - name: Validate Branch Name
         run: |
           BRANCH="${{ github.head_ref }}"
@@ -34,10 +31,6 @@ jobs:
             echo "docs/*"
             exit 1
           fi
-
-      # -----------------------------
-      # PR Description Validation
-      # -----------------------------
       - name: Validate PR Description
         run: |
           BODY="${{ github.event.pull_request.body }}"
@@ -48,9 +41,7 @@ jobs:
             echo "✅ PR Description exists."
           fi
 
-      # -----------------------------
-      # File Size Validation
-      # -----------------------------
+      
       - name: Check File Sizes
         run: |
           LIMIT=1048576
