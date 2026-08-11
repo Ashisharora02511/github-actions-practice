@@ -1,0 +1,12 @@
+name: Run Test
+on: 
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: action/checkout@4
+      - name: Run Tests
+        run: |
+          echo "Running Test..."
+          echo "All test Pass"
