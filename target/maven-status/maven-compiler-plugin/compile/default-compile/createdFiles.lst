@@ -1,0 +1,7 @@
+com\codingshuttle\aopApp\aspects\LoggingAspectV2.class
+com\codingshuttle\aopApp\aspects\LoggingAspect.class
+com\codingshuttle\aopApp\services\ShipmentService.class
+com\codingshuttle\aopApp\AopAppApplication.class
+com\codingshuttle\aopApp\aspects\MyLogging.class
+com\codingshuttle\aopApp\aspects\ValidationAspect.class
+com\codingshuttle\aopApp\services\impl\ShipmentServiceImpl.class
