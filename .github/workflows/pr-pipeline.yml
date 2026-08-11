@@ -11,7 +11,7 @@ on:
 jobs:
 
   build-test:
-    uses: ./.github/workflows/reusable-build.yml
+    uses: ./.github/workflows/reusable-build-test.yml
 
     with:
       java_version: "21"
