@@ -15,7 +15,7 @@ jobs:
 
   docker:
     needs: build-test
-    uses: ./.github/workflows/reusable-docker.yml
+    uses: ./.github/workflows/reusable-build.yml
     with:
       image_name: ashisharora25/aopapp
       tag: latest
