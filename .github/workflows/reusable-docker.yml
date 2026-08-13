@@ -53,3 +53,4 @@ jobs:
         id: image
         run: |
           echo "image_url=${{ inputs.image_name }}:${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+
