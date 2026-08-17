@@ -35,10 +35,12 @@ jobs:
           java-version: ${{ inputs.java_version }}
 
       - name: Build Project
+        working-directory: ./uberApp/uberApp
         run: mvn clean compile
 
       - name: Run Tests
         if: ${{ inputs.run_tests }}
+        working-directory: ./uberApp/uberApp
         run: mvn test
 
       - name: Set Test Result
