@@ -17,6 +17,9 @@ on:
         description: Test result
         value: ${{ jobs.build-test.outputs.test_result }}
 
+permissions:
+  contents: read
+
 jobs:
   build-test:
     runs-on: ubuntu-latest
@@ -25,6 +28,7 @@ jobs:
       test_result: ${{ steps.result.outputs.test_result }}
 
     steps:
+
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -36,13 +40,48 @@ jobs:
 
       - name: Build Project
         working-directory: ./uberApp/uberApp
-        run: mvn clean compile
+        run: ./mvnw clean compile
+
+      - name: Start PostgreSQL
+        if: ${{ inputs.run_tests }}
+        working-directory: ./uberApp/uberApp
+        run: docker compose up -d postgres
+
+      - name: Wait for PostgreSQL
+        if: ${{ inputs.run_tests }}
+        working-directory: ./uberApp/uberApp
+        shell: bash
+        run: |
+          echo "Waiting for PostgreSQL..."
+
+          for i in {1..30}; do
+            STATUS=$(docker inspect --format='{{.State.Health.Status}}' uber-postgres 2>/dev/null || echo "starting")
+
+            echo "PostgreSQL status: $STATUS"
+
+            if [ "$STATUS" = "healthy" ]; then
+              echo "PostgreSQL is ready."
+              exit 0
+            fi
+
+            sleep 2
+          done
+
+          echo "PostgreSQL did not become healthy."
+          docker compose logs postgres
+          exit 1
 
       - name: Run Tests
         if: ${{ inputs.run_tests }}
         working-directory: ./uberApp/uberApp
-        run: mvn test
+        run: ./mvnw test
 
       - name: Set Test Result
         id: result
-        run: echo "test_result=passed" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "test_result=passed" >> "$GITHUB_OUTPUT"
+
+      - name: Stop PostgreSQL
+        if: always()
+        working-directory: ./uberApp/uberApp
+        run: docker compose down
