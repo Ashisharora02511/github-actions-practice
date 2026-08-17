@@ -43,7 +43,8 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
-          context: .
+          context: ./uberApp
+          file: ./uberApp/DockerFile
           push: true
           tags: |
             ${{ inputs.image_name }}:${{ inputs.tag }}
