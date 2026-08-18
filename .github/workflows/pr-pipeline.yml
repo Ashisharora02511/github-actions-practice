@@ -16,6 +16,15 @@ jobs:
     with:
       java_version: "21"
       run_tests: true
+  dependency-review:
+    needs: build-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Dependencies for Vulnerabilities
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: critical
 
   pr-comment:
     needs: build-test
