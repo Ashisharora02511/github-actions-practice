@@ -42,7 +42,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./uberApp
-          file: ./uberApp/Dockerfile
+          file: ./uberApp/uberApp/Dockerfile
           push: true
           tags: ${{ inputs.image_name }}:${{ inputs.tag }}
 
