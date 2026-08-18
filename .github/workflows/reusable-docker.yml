@@ -39,27 +39,31 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-      - name: Check Dockerfile
-        run: |
-          echo "Current directory:"
-          pwd
-
-          echo "Repository structure:"
-          find . -maxdepth 4 -type f | sort | grep -E 'Dockerfile|pom.xml|mvnw' || true
-
-          echo "Checking expected Dockerfile:"
-          ls -la ./uberApp/uberApp/
-      - name: Build and Push Docker Image
+      
+      - name: Build Docker Image
         uses: docker/build-push-action@v6
         with:
           context: ./uberApp/uberApp
           file: ./uberApp/uberApp/Dockerfile
-          push: true
+          load: true
           tags: |
-            ${{ inputs.image_name }}:${{ inputs.tag }}
-            ${{ inputs.image_name }}:sha-${{ github.sha }}
+           ${{ inputs.image_name }}:${{ inputs.tag }}
+           ${{ inputs.image_name }}:sha-${{ github.sha }}
 
-      - name: Set Image URL
+     - name: Scan Docker Image for Vulnerabilities
+       uses: aquasecurity/trivy-action@master
+       with:
+        image-ref: ${{ inputs.image_name }}:${{ inputs.tag }}
+        format: table
+        exit-code: '1'
+        severity: 'CRITICAL,HIGH'
+
+    - name: Push Docker Image
+      run: |
+       docker push ${{ inputs.image_name }}:${{ inputs.tag }}
+       docker push ${{ inputs.image_name }}:sha-${{ github.sha }}
+
+    - name: Set Image URL
         id: image
         run: |
           echo "image_url=${{ inputs.image_name }}:${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
