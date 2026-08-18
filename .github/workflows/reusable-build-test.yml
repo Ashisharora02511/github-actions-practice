@@ -74,7 +74,11 @@ jobs:
       - name: Run Tests
         if: ${{ inputs.run_tests }}
         working-directory: ./uberApp/uberApp
-        run: ./mvnw test
+        env:
+         DB_URL: jdbc:postgresql://localhost:5432/uber_db
+         DB_USERNAME: postgres
+         DB_PASSWORD: postgres
+        run: ./mvnw test 
 
       - name: Set Test Result
         id: result
