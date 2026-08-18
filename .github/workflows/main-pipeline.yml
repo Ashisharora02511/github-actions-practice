@@ -17,7 +17,7 @@ jobs:
     needs: build-test
     uses: ./.github/workflows/reusable-docker.yml
     with:
-      image_name: ashisharora25/aopapp
+      image_name: ashisharora908/aopapp
       tag: latest
     secrets:
       docker_username: ${{ secrets.DOCKER_USERNAME }}
